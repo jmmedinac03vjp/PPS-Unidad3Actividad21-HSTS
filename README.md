@@ -128,10 +128,6 @@ archivo `/etc/apache/sites-available/default-ssl.conf`
 </VirtualHost>
 ```
 
-![](images/HSTS.png)
-![](images/HSTS.png)
-![](images/HSTS.png)
-![](images/HSTS.png)
 
 NO usar **includeSubDomains** ni **preload**, ya que no aplican en localhost.
 
@@ -144,59 +140,36 @@ Si aún no se tiene habilitado el sitio SSL en Apache, ejecutar:
 a2ensite default-ssl
 service apache2 reload
 ```
-Probar que HSTS funciona correctamente
+
+Recuerda que es posible que tengas que añadir el dominio `pps.edu`  en `/etc/hosts`.
+
+## Probar que HSTS funciona correctamente
+
 Ejecutar en la terminal:
-curl -I https://localhost --insecure
-Se debería obtener una respuesta con:
-Strict-Transport-Security: max-age=31536000
-o
- HSTS NO se aplicará en localhost en Chrome o Firefox por defecto.
-o
- Solo servirá si accedes con https://localhost y confías en el certificado.
-o
- Si se necesita una implementación real, es mejor probar en un dominio de desarrollo con HTTPS.
-Mitigación y Mejores Prácticas
-•
- Habilitar HSTS solo en sitios completamente migrados a HTTPS.
-•
- Usar preload para asegurar que el navegador recuerde la configuración incluso después de cerrar la sesión.
-## Código vulnerable
----
+
+```bash
+curl -I https://pps.edu --insecure
+```
+
+Se debería obtener una respuesta con: `Strict-Transport-Security: max-age=63072000`
+
+![](images/HSTS.png)
+
+- HSTS NO se aplicará en localhost en Chrome o Firefox por defecto.
+
+- Solo servirá si accedes con https://pps.edu y confías en el certificado.
+
+- Si se necesita una implementación real, es mejor probar en un dominio de desarrollo con HTTPS.
+
+
+## Mitigación y Mejores Prácticas
+
+- Habilitar HSTS solo en sitios completamente migrados a HTTPS.
+
+- Usar preload para asegurar que el navegador recuerde la configuración incluso después de cerrar la sesión.
 
 
 
 
 
-### **Código seguro**
----
-
-Aquí está el código securizado:
-
-🔒 Medidas de seguridad implementadas
-
-- :
-
-        - 
-
-        - 
-
-
-
-🚀 Resultado
-
-✔ 
-
-✔ 
-
-✔ 
-
-## ENTREGA
-
-> __Realiza las operaciones indicadas__
-
-> __Crea un repositorio  con nombre PPS-Unidad3Actividad6-Tu-Nombre donde documentes la realización de ellos.__
-
-> No te olvides de documentarlo convenientemente con explicaciones, capturas de pantalla, etc.
-
-> __Sube a la plataforma, tanto el repositorio comprimido como la dirección https a tu repositorio de Github.__
 
